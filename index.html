@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Slider</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"/>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <style>
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 70px;
+            height: 26px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: black;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 15px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        input:checked + .slider {
+            background-color: black;
+        }
+
+        input:focus + .slider {
+            box-shadow: 0 0 1px #2196F3;
+        }
+
+        input:checked + .slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
+
+        .slider.round {
+            border-radius: 30px;
+            text-align: right;
+        }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+
+        .search-container {
+            position: relative;
+            width: 300px;
+        }
+
+        .align {
+            text-align: center;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 8px 30px 8px 10px;
+            border-radius: 12px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        .search-icon {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            background-image: url('search-icon.png');
+            background-size: cover;
+        }
+
+        input:checked + .slider {
+            background-color: #010407;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        p {
+            font-family: platypi;
+            color: grey;
+            font-size: 12px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .marquee-item {
+            margin-right: 20px;
+            color: white;
+        }
+
+        .marquee_background {
+            background-color: black;
+            width: 515px;
+        }
+
+        .width {
+            width: 250px;
+        }
+
+        .card_img {
+            border: 0px;
+            border-radius: 80px;
+            width: 10vh;
+            padding: 3px;
+        }
+
+        .card_para {
+            font-family: roboto;
+            font-weight: bold;
+        }
+
+        .logo_card_1 {
+            border-width: 0px;
+            width: 200px;
+            margin: 5px;
+            font-weight: bold;
+            background-color: rgb(0, 5, 0);
+            color: white;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+
+        .logo_card_2 {
+            border-width: 0px;
+            width: 200px;
+            margin: 5px;
+            font-weight: bold;
+            background-color: rgb(191, 207, 191);
+            color: rgb(8, 1, 1);
+            font-family: 'Gill Sans', 'curvie', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+
+        .align {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .head-section{
+            width:100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body class="align">
+
+    <div class="head-section">
+        <div class="fluid-container m-1">
+            <div class="row">
+                <div class="col-6 ">
+                    <button class="navbar-brand logo_card_1">Flipcart</button>
+                </div>
+                <div class="col-6 ">
+                    <button class="navbar-brand logo_card_2">Grocery</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <p>Brand Mall</p>
+                    <label class="switch">
+                        <input type="checkbox" checked>
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <div class="col-*">
+                    <div class="search-container mt-3">
+                        <div class="search-icon"></div>
+                        <input type="text" placeholder="Search for products">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slider-section">
+        <div class="fluid-container">
+            <div class="row">
+                <marquee behavior="scroll" class="marquee_background" direction="left" scrollamount="5">
+                    <span class="marquee-item">LATEST LAUNCHES</span>
+                    <span class="marquee-item">+</span>
+                    <span class="marquee-item">GENUINE BRAND</span>
+                </marquee>
+            </div>
+            <div>
+                <div class="slide fade">
+                    <img src="https://i.insider.com/6570bab27a3c8094d5da466f?width=700" alt="Image 1" width="500vh">
+                </div>
+                <div class="slide fade">
+                    <img src="https://news.northeastern.edu/wp-content/uploads/2019/09/neu_m043gb28m.jpg" alt="Image 2" width="500vh">
+                </div>
+                <div class="slide fade">
+                    <img src="https://images.samsung.com/is/image/samsung/assets/in/explore/brand/latest-5g-mobile-phone-online/banner-mobile-720x761.jpg?$720_N_JPG$" alt="Image 3" width="500vh">
+                </div>
+                <div style="text-align:center;">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-section">
+        <div class="text-center fluid-container p-2">
+            <div class="row">
+                <div class="col-lg-2">
+                    <img src="https://hips.hearstapps.com/hmg-prod/images/spring-summer-fashion-trends-2024-65aff797142f1.png?crop=0.504xw:1.00xh;0.0155xw,0&resize=640:*" class="card_img">
+                    <p class="card_para"><span>Fashion</span></p>
+                </div>
+                <div class="col-lg-2">
+                    <img src="https://images.samsung.com/is/image/samsung/assets/in/explore/brand/latest-5g-mobile-phone-online/banner-mobile-720x761.jpg?$720_N_JPG$" class="card_img">
+                    <p class="card_para"><span>Mobile</span></p>
+                </div>
+                <div class="col-lg-2">
+                    <img src="https://duet-cdn.vox-cdn.com/thumbor/0x0:3000x2000/2400x2400/filters:focal(1500x1000:1501x1001):format(webp)/cdn.vox-cdn.com/uploads/chorus_asset/file/24714873/236676_02_How_to_pick_a_smart_home_platform_SHaddad.jpg" class="card_img">
+                    <p class="card_para"><span>SmartDevice</span></p>
+                </div>
+                <div class="col-lg-2">
+                    <img src="https://cdn.thewirecutter.com/wp-content/media/2024/01/40to49inchtvs-2048px-2017-3x2-1.jpg" class="card_img">
+                    <p class="card_para"><span>Tvs</span><span>Laptops</span></p>
+                </div>
+                <div class="col-lg-2">
+                    <img src="https://images.kirklands.com/is/image/Kirklands/h_122623_furnituress_hero01?$BannerWeb2019$" class="card_img">
+                    <p class="card_para"><span>Home</span></p>
+                </div>
+                <div class="col-lg-2">
+                    <img src="https://hips.hearstapps.com/hmg-prod/images/holy-grail-beauty-awards-5-11-1652276819.png?crop=1.00xw:0.881xh;0,0.119xh&resize=768:*" class="card_img">
+                    <p class="card_para"><span>Beauty</span><span> Gromming</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+<script src="script.js"></script>
+</body>
+</html>
